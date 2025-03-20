@@ -20,13 +20,13 @@ namespace NodeCanvas.Tasks.Actions {
 		//Call EndAction() to mark the action as finished, either in success or failure.
 		//EndAction can be called from anywhere.
 		protected override void OnExecute() {
-			animator.SetTrigger("Raise");
+			animator.SetTrigger("Raise"); //start the raise arms animation
             animator.ResetTrigger("Lower");
 
-            liftObject.value = GameObject.FindAnyObjectByType<Box>().gameObject;
+            liftObject.value = GameObject.FindAnyObjectByType<Box>().gameObject; //find a box in the scene
 
-            liftObject.value.GetComponent<Rigidbody>().useGravity = false;
-            liftObject.value.transform.parent = parentObject.value.transform;
+            liftObject.value.GetComponent<Rigidbody>().useGravity = false; //turn off gravity for the box
+            liftObject.value.transform.parent = parentObject.value.transform; //make box a child of the arms
 
             EndAction(true);
 		}

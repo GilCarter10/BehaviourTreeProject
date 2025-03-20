@@ -9,6 +9,7 @@ namespace NodeCanvas.Tasks.Conditions {
 
         public BBParameter<Transform> targetTransform;
         public float arrivalDistance;
+
         //Use for initialization. This is called only once in the lifetime of the task.
         //Return null if init was successfull. Return an error string otherwise
         protected override string OnInit(){
@@ -28,9 +29,10 @@ namespace NodeCanvas.Tasks.Conditions {
 		//Called once per frame while the condition is active.
 		//Return whether the condition is success or failure.
 		protected override bool OnCheck() {
-            float distanceToTarget = Vector3.Distance(agent.transform.position, targetTransform.value.position);
+            //get the agent's distance to the target transform
+			float distanceToTarget = Vector3.Distance(agent.transform.position, targetTransform.value.position); 
 
-            return distanceToTarget < arrivalDistance;
+            return distanceToTarget < arrivalDistance; //true once the distance is less than the specified arrival distance
         }
 	}
 }

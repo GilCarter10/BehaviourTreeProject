@@ -22,6 +22,7 @@ namespace NodeCanvas.Tasks.Actions {
 		//Call EndAction() to mark the action as finished, either in success or failure.
 		//EndAction can be called from anywhere.
 		protected override void OnExecute() {
+			//the script sets the boxHeld bool to a new value
 			if (newValue == true)
 			{
 				//box is now picked up
@@ -29,11 +30,12 @@ namespace NodeCanvas.Tasks.Actions {
 			} else
 			{
                 //box is now put down
-                liftObject.value.transform.parent = null;
-                liftObject.value.GetComponent<Rigidbody>().useGravity = true;
-                liftObject.value.GetComponent<Box>().SendOff();
-                spawner.SpawnNewBox();
                 boxHeld.value = false;
+                
+				liftObject.value.transform.parent = null; //box has no parent
+                liftObject.value.GetComponent<Rigidbody>().useGravity = true; //turn gravity back on 
+                liftObject.value.GetComponent<Box>().SendOff(); //start the "SendOff" on the box script
+                spawner.SpawnNewBox(); //spawn a new box from the spawner
             }
 			
 			EndAction(true);

@@ -19,7 +19,7 @@ public class Spawner : MonoBehaviour
 
     public void SpawnNewBox()
     {
-        Instantiate(prefab, transform.position, transform.rotation);
+        Instantiate(prefab, transform.position, transform.rotation); //spawn new box
     }
 
 }

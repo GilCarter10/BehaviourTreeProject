@@ -22,9 +22,9 @@ namespace NodeCanvas.Tasks.Actions {
 		//EndAction can be called from anywhere.
 		protected override void OnExecute() {
             NavMeshHit hit;
-            NavMesh.SamplePosition(targetTransform.value.position, out hit, 400f, NavMesh.AllAreas);
+            NavMesh.SamplePosition(targetTransform.value.position, out hit, 400f, NavMesh.AllAreas); //ensure the transform is on the NavMesh
 
-            navMeshAgent.SetDestination(hit.position);
+            navMeshAgent.SetDestination(hit.position); //set NavMesh destination
 
             EndAction(true);
 		}

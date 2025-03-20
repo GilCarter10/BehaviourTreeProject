@@ -29,9 +29,9 @@ namespace NodeCanvas.Tasks.Conditions {
 		//Called once per frame while the condition is active.
 		//Return whether the condition is success or failure.
 		protected override bool OnCheck() {
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName(animName))
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName(animName)) //get information on the specified animation state
             {
-                if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+                if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f) //if the animation is complete
                 {
 					return true;
                 } else
