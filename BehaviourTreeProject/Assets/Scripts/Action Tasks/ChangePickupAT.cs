@@ -2,12 +2,15 @@ using NodeCanvas.Framework;
 using ParadoxNotion.Design;
 using UnityEngine;
 
+
 namespace NodeCanvas.Tasks.Actions {
 
-	public class DropAT : ActionTask {
+	public class ChangePickupBoolAT : ActionTask {
 
-
-        public Animator animator;
+        public BBParameter<bool> boxHeld;
+		public bool newValue;
+		public BBParameter<GameObject> liftObject;
+        public Spawner spawner;
 
         //Use for initialization. This is called only once in the lifetime of the task.
         //Return null if init was successfull. Return an error string otherwise
@@ -19,9 +22,21 @@ namespace NodeCanvas.Tasks.Actions {
 		//Call EndAction() to mark the action as finished, either in success or failure.
 		//EndAction can be called from anywhere.
 		protected override void OnExecute() {
-			animator.SetTrigger("Lower");
-			animator.ResetTrigger("Raise");
-            EndAction(true);
+			if (newValue == true)
+			{
+				//box is now picked up
+				boxHeld.value = newValue;
+			} else
+			{
+                //box is now put down
+                liftObject.value.transform.parent = null;
+                liftObject.value.GetComponent<Rigidbody>().useGravity = true;
+                liftObject.value.GetComponent<Box>().SendOff();
+                spawner.SpawnNewBox();
+                boxHeld.value = false;
+            }
+			
+			EndAction(true);
 		}
 
 		//Called once per frame while the action is active.

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace NodeCanvas.Tasks.Actions {
 
-	public class PickupAT : ActionTask {
+	public class LiftAT : ActionTask {
 
 		public BBParameter<bool> boxHeld;
         public Animator animator;
@@ -21,12 +21,13 @@ namespace NodeCanvas.Tasks.Actions {
 		//EndAction can be called from anywhere.
 		protected override void OnExecute() {
 			animator.SetTrigger("Raise");
-			boxHeld.value = true;
+            animator.ResetTrigger("Lower");
 
-			liftObject.value = GameObject.FindAnyObjectByType<Box>().gameObject;
+            liftObject.value = GameObject.FindAnyObjectByType<Box>().gameObject;
 
             liftObject.value.GetComponent<Rigidbody>().useGravity = false;
             liftObject.value.transform.parent = parentObject.value.transform;
+
             EndAction(true);
 		}
 
